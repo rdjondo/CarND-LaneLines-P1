@@ -8,10 +8,88 @@ In this project you will detect lane lines in images using Python and OpenCV.  O
 
 **To setup the project, check out the original notes at the end of this README**
 
-**Image segmentation**
+#**My solution for Image segmentation on the challenge video**
+My solution for the Udacity challenge for the firt project. 
+Notice how the colour of the tarmac changes on the bridge to become very close to the colour of the left lane.
+https://www.youtube.com/watch?v=-x-1rLKzM0I
 
-For this project I would recommend using some image segmentation techniques  
+I used some colour segmentation and this turned out to be very successful for this project.    
 Some image segmentation techniques that I found very useful for this project.
+This technique was particularly useful for the challenge.
+
+
+<img src="my_images/original_frame.png" width="480" alt="original_frame" />
+
+    # Let's get the yellow in the image
+    img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+    # In OpenCV the HSV space is bounded by 0 and 180 on H, 0 and 255 on S, 0 and 255 on V   
+    lower_yellow = np.array([18, 50, 50], np.uint8)
+    upper_yellow = np.array([30, 255, 255], np.uint8)
+    
+    # Calculate mask for color segmentation
+    mask = cv2.inRange(img_hsv, lower_yellow, upper_yellow)
+    im_yellow = cv2.bitwise_and(img,img, mask= mask)
+    
+    plt.imshow(im_yellow)
+    plt.title('Image masked for getting yellow pixels')
+    plt.show()
+
+<img src="my_images/yellow_masked.png" width="480" alt="original_frame" />
+
+    # Let's get the white from the image
+    lower_white = np.array([150, 150, 190], np.uint8)
+    upper_white = np.array([255, 255, 255], np.uint8)
+    mask = cv2.inRange(img, lower_white, upper_white)
+    im_white = cv2.bitwise_and(img,img, mask= mask)
+    
+    plt.imshow(im_white)
+    plt.title('Image masked for getting white pixels')
+    plt.show()
+    
+
+<img src="my_images/white_masked.png" width="480" alt="original_frame" />
+    
+    # Combine selected images
+    img = np.clip(im_white.astype('uint32')+ im_yellow.astype('uint32'),0,255).astype('uint8')
+      
+    plt.imshow(img)
+    plt.title('Combining yellow and white segmented images')
+    plt.show()
+
+<img src="my_images/combining_yellow_white.png" width="480" alt="original_frame" />
+
+    # Convert image to grascale
+    #gray = grayscale(img.astype('uint8')).astype('int32')
+    gray = grayscale(img.astype('uint8'))
+    
+    gray_masked = region_of_interest(gray,vertices)
+    
+    # Filter image (blur/low pass filter)
+    kernel_size = 7
+    gray = gaussian_blur(gray, kernel_size)
+    
+    
+    # Edge detector
+    low_threshold = 50
+    high_threshold = low_threshold * 3
+    gray = canny(gray, low_threshold, high_threshold)
+    
+    plt.imshow(gray, cmap='gray')
+    plt.title('Edge detection on segmented image')
+    plt.show()
+
+<img src="my_images/edge_detection.png" width="480" alt="original_frame" />
+
+    # Mask road surface
+    gray = region_of_interest(gray,vertices)
+    plt.imshow(gray, cmap='gray')
+    plt.title('Masking road surface')
+    plt.show()
+    
+
+<img src="my_images/edge_masked.png" width="480" alt="original_frame" />
+
+    
 
 #**Original Notes for the project** 
 **Step 1:** Getting setup with Python
