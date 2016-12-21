@@ -1,5 +1,4 @@
 #**Finding Lane Lines on the Road** 
-<img src="laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
 
 When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
 
@@ -11,7 +10,11 @@ In this project you will detect lane lines in images using Python and OpenCV.  O
 #**My solution for Image segmentation on the challenge video**
 My solution for the Udacity challenge for the firt project. 
 Notice how the colour of the tarmac changes on the bridge to become very close to the colour of the left lane.
+
+Youtube video:
 https://www.youtube.com/watch?v=-x-1rLKzM0I
+[![Self-driving car extra challenge](http://img.youtube.com/vi/-x-1rLKzM0I/0.jpg)](https://www.youtube.com/watch?v=-x-1rLKzM0I "Self-driving car extra challenge")
+
 
 I used some colour segmentation and this turned out to be very successful for this project.    
 Some image segmentation techniques that I found very useful for this project.
