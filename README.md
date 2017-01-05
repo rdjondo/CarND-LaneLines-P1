@@ -11,7 +11,7 @@ In this project you will detect lane lines in images using Python and OpenCV.  O
 My solution for the Udacity challenge for the firt project. 
 Notice how the colour of the tarmac changes on the bridge to become very close to the colour of the left lane.
 
-Youtube video:
+**Youtube video:**
 https://www.youtube.com/watch?v=-x-1rLKzM0I
 [![Self-driving car extra challenge](http://img.youtube.com/vi/-x-1rLKzM0I/0.jpg)](https://www.youtube.com/watch?v=-x-1rLKzM0I "Self-driving car extra challenge")
 
